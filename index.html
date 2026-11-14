@@ -1,25 +1,27 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0d14" />
+    <meta name="theme-color" content="#0c791e" />
     <link rel="icon" type="image/svg+xml" href="/brand-mark.svg" />
     <link rel="preload" as="image" href="/images/wilberforce_portrait.webp" fetchpriority="high" />
     <style>
       html, body, #root { min-height: 100%; margin: 0; }
+      body { background: #ffffff; }
       .boot-splash {
         min-height: 100vh; display: grid; align-content: center; justify-items: center; gap: 12px;
-        background: #0a0d14; color: #e2e8f0; font-family: system-ui, sans-serif;
+        background: linear-gradient(135deg, #faf8f4 0%, #ffffff 55%, #fdf2e5 100%);
+        color: #111827; font-family: 'Inter', system-ui, sans-serif;
       }
       .boot-splash img {
         width: 88px; height: 88px; object-fit: cover; border-radius: 50%;
-        border: 2px solid #10b981; box-shadow: 0 0 32px rgba(16,185,129,.2);
+        border: 2px solid #e07b0f; box-shadow: 0 16px 40px rgba(17,24,39,.12);
       }
-      .boot-splash strong { font-size: 1rem; letter-spacing: .02em; }
-      .boot-splash span { color: #94a3b8; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; }
+      .boot-splash strong { font-size: 1rem; letter-spacing: .01em; }
+      .boot-splash span { color: #5b6575; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; }
       .boot-splash i {
-        width: 18px; height: 18px; border: 2px solid #334155; border-top-color: #10b981;
+        width: 18px; height: 18px; border: 2px solid #e2e8f0; border-top-color: #e07b0f;
         border-radius: 50%; animation: boot-spin .8s linear infinite;
       }
       @keyframes boot-spin { to { transform: rotate(360deg); } }
@@ -33,9 +35,9 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#0a0d14] text-slate-100 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+  <body class="bg-white text-[#111827] font-sans antialiased selection:bg-[#fdf2e5] selection:text-[#111827]">
     <div id="root">
       <div class="boot-splash" role="status" aria-live="polite">
         <img src="/images/wilberforce_portrait.webp" alt="" width="88" height="88" fetchpriority="high" />
@@ -47,4 +49,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

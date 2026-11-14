@@ -8,104 +8,94 @@ interface ExperienceSectionProps {
 
 export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => {
   return (
-    <section id="experience" className="py-20 border-b border-slate-800/80 bg-[#090c13] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2 uppercase tracking-wider">
-            <Briefcase className="w-3.5 h-3.5" />
+    <section id="experience" className="ds-section">
+      <div className="ds-shell">
+        <div className="mb-10 md:mb-12">
+          <div className="ds-eyebrow mb-4">
+            <Briefcase className="h-3.5 w-3.5" />
             <span>Career, Global Advocacy &amp; Track Record</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white font-display">
-            Professional Experience &amp; Impact
-          </h2>
-          <p className="mt-2 text-slate-400 max-w-2xl text-sm sm:text-base">
+          <h2 className="ds-h2">Professional Experience &amp; Impact</h2>
+          <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-[#5b6575]">
             Track record spanning global youth ambassadorship, international NGO apparel branding, pre-press color separations, and sustainable community platforms.
           </p>
         </div>
 
-        <div className="relative border-l border-slate-800 ml-4 sm:ml-6 space-y-10">
+        <div className="relative ml-3 space-y-8 border-l border-[#d7dde6] pl-6 sm:ml-5 sm:pl-8">
           {experience.map((item) => {
             const isAmbassador = item.type === 'Ambassador' || item.type === 'Global Fellowship';
 
             return (
-              <div key={item.id} className="relative pl-6 sm:pl-8 group">
-                {/* Timeline marker node */}
+              <div key={item.id} className="group relative">
                 <div
-                  className={`absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-slate-950 border-2 ${
-                    isAmbassador
-                      ? 'border-amber-400 group-hover:bg-amber-400 group-hover:scale-125 shadow-md shadow-amber-950'
-                      : 'border-emerald-500 group-hover:bg-emerald-500 group-hover:scale-125 shadow-md shadow-emerald-950'
-                  } transition-all`}
+                  className={`absolute -left-[33px] top-6 h-4 w-4 rounded-full border-2 bg-white transition-transform group-hover:scale-110 sm:-left-[41px] ${
+                    isAmbassador ? 'border-[#e07b0f]' : 'border-[#0c791e]'
+                  }`}
                 />
 
                 <div
-                  className={`p-6 rounded-2xl ${
+                  className={`space-y-4 rounded-[20px] border bg-white p-6 transition-colors ${
                     isAmbassador
-                      ? 'bg-slate-900/80 border-amber-500/40 hover:border-amber-400/70 shadow-lg shadow-amber-950/20'
-                      : 'bg-slate-900/60 border-slate-800/80 hover:border-slate-700'
-                  } border transition-all space-y-4`}
+                      ? 'border-[#f5dcc1] hover:border-[#e07b0f]/60'
+                      : 'border-[#e2e8f0] hover:border-[#0c791e]/40'
+                  }`}
                 >
-                  {/* Header row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
                     <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="text-[18px] font-semibold text-[#111827] transition-colors group-hover:text-[#e07b0f]">
                           {item.role}
                         </h3>
                         {isAmbassador && (
-                          <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                            <Award className="w-3 h-3 text-amber-400" />
+                          <span className="hidden items-center gap-1 rounded-full border border-[#f5dcc1] bg-[#fdf2e5] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#a85c0b] sm:inline-flex">
+                            <Award className="h-3 w-3" />
                             Honorary Appointment
                           </span>
                         )}
                       </div>
                       <div
-                        className={`text-sm font-semibold font-mono ${
-                          isAmbassador ? 'text-amber-400' : 'text-emerald-400'
+                        className={`text-[14px] font-semibold ${
+                          isAmbassador ? 'text-[#e07b0f]' : 'text-[#0c791e]'
                         }`}
                       >
                         {item.company}
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-400">
-                      <span className="flex items-center gap-1 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
-                        <Calendar className="w-3 h-3 text-cyan-400" />
+                    <div className="flex flex-wrap items-center gap-2 text-[11px] font-medium">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-white px-2.5 py-1 text-[#5b6575]">
+                        <Calendar className="h-3 w-3 text-[#8a93a1]" />
                         {item.period}
                       </span>
-                      <span className="flex items-center gap-1 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
-                        <MapPin className="w-3 h-3 text-emerald-400" />
+                      <span className="inline-flex items-center gap-1 rounded-full border border-[#e2e8f0] bg-white px-2.5 py-1 text-[#5b6575]">
+                        <MapPin className="h-3 w-3 text-[#8a93a1]" />
                         {item.location}
                       </span>
                       <span
-                        className={`px-2.5 py-1 rounded-lg flex items-center gap-1 text-xs border ${
+                        className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 font-semibold ${
                           isAmbassador
-                            ? 'bg-amber-950/60 text-amber-300 border-amber-500/50 font-semibold'
-                            : 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
+                            ? 'border-[#f5dcc1] bg-[#fdf2e5] text-[#a85c0b]'
+                            : 'border-[#d9eadc] bg-[#eef7ef] text-[#0c791e]'
                         }`}
                       >
-                        {isAmbassador && <Award className="w-3 h-3 text-amber-400" />}
+                        {isAmbassador && <Award className="h-3 w-3" />}
                         {item.type}
                       </span>
                     </div>
                   </div>
 
-                  {/* Summary */}
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    {item.summary}
-                  </p>
+                  <p className="text-[14px] leading-[1.7] text-[#3f4a5a]">{item.summary}</p>
 
-                  {/* Achievements List */}
                   <div className="space-y-2 pt-1">
-                    <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#5b6575]">
                       Key Deliverables &amp; Outcomes:
                     </div>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-[13px] text-[#3f4a5a]">
                       {item.achievements.map((ach, aIdx) => (
                         <li key={aIdx} className="flex items-start gap-2">
                           <CheckCircle2
-                            className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${
-                              isAmbassador ? 'text-amber-400' : 'text-emerald-400'
+                            className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
+                              isAmbassador ? 'text-[#e07b0f]' : 'text-[#0c791e]'
                             }`}
                           />
                           <span>{ach}</span>
@@ -114,15 +104,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience
                     </ul>
                   </div>
 
-                  {/* Tech Stack / Domain Chips */}
-                  <div className="pt-3 border-t border-slate-800/60 flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1.5 border-t border-[#e2e8f0] pt-3">
                     {item.technologies.map((t) => (
                       <span
                         key={t}
-                        className={`px-2 py-0.5 rounded text-[11px] font-mono border ${
+                        className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${
                           isAmbassador
-                            ? 'bg-amber-950/30 text-amber-200 border-amber-800/60'
-                            : 'bg-slate-950 text-slate-400 border border-slate-800'
+                            ? 'border-[#f5dcc1] bg-[#fdf2e5] text-[#a85c0b]'
+                            : 'border-[#e2e8f0] bg-[#f5f5f7] text-[#5b6575]'
                         }`}
                       >
                         {t}

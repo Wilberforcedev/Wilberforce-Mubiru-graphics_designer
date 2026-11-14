@@ -4,13 +4,8 @@ import {
   Send,
   Check,
   Copy,
-  Clock,
-  Globe,
-  MessageSquare,
   ShieldCheck,
   ExternalLink,
-  Zap,
-  Phone,
   MessageCircle,
   Instagram,
   Linkedin,
@@ -83,41 +78,39 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
     }, 1000);
   };
 
+  const labelClass = 'mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.1em] text-[#5b6575]';
+
   return (
-    <section id="contact" className="py-20 border-b border-slate-800/80 bg-[#0a0d14] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 mb-2 uppercase tracking-wider">
-            <Mail className="w-3.5 h-3.5" />
+    <section id="contact" className="ds-section ds-section--panel">
+      <div className="ds-shell">
+        <div className="mb-10 md:mb-12">
+          <div className="ds-eyebrow mb-4">
+            <Mail className="h-3.5 w-3.5" />
             <span>Direct Inquiries &amp; Bulk Orders</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white font-display">
-            Let&apos;s Make Your Next Bulk Order Print Perfect
-          </h2>
-          <p className="mt-2 text-slate-400 max-w-2xl text-sm sm:text-base">
+          <h2 className="ds-h2">Let&apos;s Make Your Next Bulk Order Print Perfect</h2>
+          <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-[#5b6575]">
             Bulk tees, reflector vests, event kits, and NGO branding. Share your quantity, deadline, and artwork specifications. I reply fastest on WhatsApp.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* Left Column: Direct Communication Channels & Status */}
-          <div className="lg:col-span-5 space-y-5">
+          <div className="space-y-4 lg:col-span-5">
             {/* WhatsApp Priority Callout */}
             {profile.whatsAppUrl && (
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-950/50 to-slate-900 border border-emerald-500/40 shadow-xl space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono text-emerald-400">
-                  <span className="flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                    <MessageCircle className="w-4 h-4" />
+              <div className="space-y-3 rounded-[20px] border border-[#d9eadc] bg-[#eef7ef] p-6">
+                <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0c791e]">
+                  <span className="flex items-center gap-1.5">
+                    <MessageCircle className="h-4 w-4" />
                     FASTEST RESPONSE
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                  <span className="rounded-full border border-[#d9eadc] bg-white px-2.5 py-0.5">
                     &lt; 30 Mins
                   </span>
                 </div>
-                <h4 className="text-lg font-bold text-white">
-                  Direct WhatsApp Chat
-                </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <h4 className="text-[18px] font-semibold text-[#111827]">Direct WhatsApp Chat</h4>
+                <p className="text-[13px] leading-[1.65] text-[#3f4a5a]">
                   Send sketches, quantity requirements, or rush event dates directly. I will quote back immediately with lead time and color specs.
                 </p>
                 <a
@@ -125,96 +118,96 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                   href={profile.whatsAppUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-md shadow-emerald-950"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0c791e] px-4 py-3 text-[13px] font-semibold text-white transition-colors hover:bg-[#0a6418]"
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <MessageCircle className="h-4 w-4" />
                   <span>Chat on WhatsApp ({profile.phone || '+256 755943973'})</span>
                 </a>
               </div>
             )}
 
             {/* Status & SLA Box */}
-            <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                <span className="text-xs font-mono text-slate-400">PRODUCTION STATUS</span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 text-xs font-mono border border-emerald-800">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="space-y-4 rounded-[20px] border border-[#e2e8f0] bg-white p-6">
+              <div className="flex items-center justify-between border-b border-[#e2e8f0] pb-3">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#5b6575]">
+                  PRODUCTION STATUS
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#d9eadc] bg-[#eef7ef] px-2.5 py-0.5 text-[11px] font-semibold text-[#0c791e]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0c791e]" />
                   <span>Open for Bulk Orders</span>
                 </span>
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-base font-semibold text-white">
-                  Kleberson Wear UG &amp; Grin Mates
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <h4 className="text-[16px] font-semibold text-[#111827]">Kleberson Wear UG &amp; Grin Mates</h4>
+                <p className="text-[13px] leading-[1.65] text-[#5b6575]">
                   Based in Kampala, Uganda. Bulk delivery across East Africa and onsite activation available for marathons, conferences, and NGO field teams.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
-                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                  <div className="text-slate-500 text-[10px] mb-0.5">LOCATION</div>
-                  <div className="font-bold text-emerald-400">{profile.location}</div>
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <div className="rounded-xl border border-[#e2e8f0] bg-[#f5f5f7] p-3">
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#8a93a1]">LOCATION</div>
+                  <div className="mt-0.5 text-[13px] font-semibold text-[#111827]">{profile.location}</div>
                 </div>
-                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                  <div className="text-slate-500 text-[10px] mb-0.5">LOCAL TIME</div>
-                  <div className="font-bold text-cyan-400">{currentTime || 'Active'}</div>
+                <div className="rounded-xl border border-[#e2e8f0] bg-[#f5f5f7] p-3">
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#8a93a1]">LOCAL TIME</div>
+                  <div className="mt-0.5 text-[13px] font-semibold text-[#0c791e]">{currentTime || 'Active'}</div>
                 </div>
               </div>
             </div>
 
             {/* Quick Copyable Brief Template */}
-            <div className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 space-y-2.5">
+            <div className="space-y-2.5 rounded-[20px] border border-[#e2e8f0] bg-white p-5">
               <div className="flex items-center justify-between">
-                <div className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#5b6575]">
+                  <FileText className="h-3.5 w-3.5 text-[#e07b0f]" />
                   <span>QUICK BRIEF TEMPLATE</span>
                 </div>
                 <button
                   id="copy-brief-btn"
                   onClick={copyQuickBrief}
-                  className="flex items-center gap-1 text-[11px] font-mono text-emerald-400 hover:text-emerald-300 transition-colors"
+                  className="flex items-center gap-1 text-[11px] font-semibold text-[#e07b0f] transition-colors hover:text-[#f59e42]"
                 >
                   {copiedBrief ? (
                     <>
-                      <Check className="w-3 h-3" />
+                      <Check className="h-3 w-3" />
                       <span>Copied to Clipboard!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3 h-3" />
+                      <Copy className="h-3 w-3" />
                       <span>Copy Template</span>
                     </>
                   )}
                 </button>
               </div>
-              <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800 leading-relaxed select-all">
+              <p className="select-all rounded-xl border border-[#e2e8f0] bg-[#f5f5f7] p-3 text-[12px] leading-[1.65] text-[#3f4a5a]">
                 &ldquo;{quickBriefText}&rdquo;
               </p>
             </div>
 
             {/* Direct Copyable Email Box */}
-            <div className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex items-center justify-between gap-3">
+            <div className="flex items-center justify-between gap-3 rounded-[20px] border border-[#e2e8f0] bg-white p-5">
               <div className="min-w-0">
-                <div className="text-[11px] font-mono text-slate-400 mb-1">DIRECT INBOX</div>
-                <div className="text-sm font-mono text-slate-200 truncate font-medium">
-                  {profile.email}
+                <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#8a93a1]">
+                  DIRECT INBOX
                 </div>
+                <div className="truncate text-[13px] font-medium text-[#111827]">{profile.email}</div>
               </div>
               <button
                 id="copy-email-btn"
                 onClick={copyEmail}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono transition-colors shrink-0"
+                className="flex shrink-0 items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#3f4a5a] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]"
               >
                 {copiedEmail ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400">Copied</span>
+                    <Check className="h-3.5 w-3.5 text-[#0c791e]" />
+                    <span className="text-[#0c791e]">Copied</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="h-3.5 w-3.5" />
                     <span>Copy</span>
                   </>
                 )}
@@ -223,181 +216,169 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
 
             {/* Social & Direct Communication Channels */}
             <div className="grid grid-cols-2 gap-3">
-              {/* LinkedIn Profile */}
               <a
                 id="contact-linkedin-card"
                 href={profile.linkedinUrl || 'https://www.linkedin.com/in/wilberforce-mubiru'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all flex items-center justify-between group shadow-sm"
+                className="group flex items-center justify-between rounded-xl border border-[#e2e8f0] bg-white p-3.5 transition-colors hover:border-[#e07b0f]"
               >
-                <div className="text-xs font-mono min-w-0">
-                  <div className="text-slate-400 text-[10px] flex items-center gap-1">
-                    <Linkedin className="w-3 h-3 text-blue-400" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8a93a1]">
+                    <Linkedin className="h-3 w-3" />
                     <span>LINKEDIN</span>
                   </div>
-                  <div className="text-slate-200 font-semibold group-hover:text-blue-400 truncate mt-0.5">
+                  <div className="mt-0.5 truncate text-[12px] font-semibold text-[#111827] group-hover:text-[#e07b0f]">
                     {profile.linkedinHandle || 'wilberforce-mubiru'}
                   </div>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 shrink-0" />
+                <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[#8a93a1] group-hover:text-[#e07b0f]" />
               </a>
 
-              {/* Instagram Profile */}
               <a
                 id="contact-instagram-card"
                 href={profile.instagramUrl || 'https://instagram.com/willinho23'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/50 transition-all flex items-center justify-between group shadow-sm"
+                className="group flex items-center justify-between rounded-xl border border-[#e2e8f0] bg-white p-3.5 transition-colors hover:border-[#e07b0f]"
               >
-                <div className="text-xs font-mono min-w-0">
-                  <div className="text-slate-400 text-[10px] flex items-center gap-1">
-                    <Instagram className="w-3 h-3 text-pink-400" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8a93a1]">
+                    <Instagram className="h-3 w-3" />
                     <span>INSTAGRAM</span>
                   </div>
-                  <div className="text-slate-200 font-semibold group-hover:text-pink-400 truncate mt-0.5">
+                  <div className="mt-0.5 truncate text-[12px] font-semibold text-[#111827] group-hover:text-[#e07b0f]">
                     @{profile.instagramHandle || 'willinho23'}
                   </div>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-pink-400 shrink-0" />
+                <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[#8a93a1] group-hover:text-[#e07b0f]" />
               </a>
 
-              {/* GitHub Repos */}
               <a
                 id="contact-github-card"
                 href={profile.githubUrl || 'https://github.com/Wilberforcedev'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/50 transition-all flex items-center justify-between group shadow-sm"
+                className="group flex items-center justify-between rounded-xl border border-[#e2e8f0] bg-white p-3.5 transition-colors hover:border-[#e07b0f]"
               >
-                <div className="text-xs font-mono min-w-0">
-                  <div className="text-slate-400 text-[10px] flex items-center gap-1">
-                    <Github className="w-3 h-3 text-purple-400" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8a93a1]">
+                    <Github className="h-3 w-3" />
                     <span>GITHUB</span>
                   </div>
-                  <div className="text-slate-200 font-semibold group-hover:text-purple-300 truncate mt-0.5">
+                  <div className="mt-0.5 truncate text-[12px] font-semibold text-[#111827] group-hover:text-[#e07b0f]">
                     @{profile.handle}
                   </div>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-purple-400 shrink-0" />
+                <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[#8a93a1] group-hover:text-[#e07b0f]" />
               </a>
 
-              {/* WhatsApp Direct Line */}
               <a
                 id="contact-whatsapp-card"
                 href={profile.whatsAppUrl || 'https://wa.me/256755943973'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-emerald-950/30 hover:bg-emerald-950/60 border border-emerald-800/50 hover:border-emerald-500/60 transition-all flex items-center justify-between group shadow-sm"
+                className="group flex items-center justify-between rounded-xl border border-[#d9eadc] bg-[#eef7ef] p-3.5 transition-colors hover:border-[#0c791e]"
               >
-                <div className="text-xs font-mono min-w-0">
-                  <div className="text-emerald-400 text-[10px] flex items-center gap-1">
-                    <MessageCircle className="w-3 h-3 text-emerald-400" />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#0c791e]">
+                    <MessageCircle className="h-3 w-3" />
                     <span>WHATSAPP</span>
                   </div>
-                  <div className="text-emerald-200 font-semibold group-hover:text-emerald-100 truncate mt-0.5">
+                  <div className="mt-0.5 truncate text-[12px] font-semibold text-[#0a6418]">
                     {profile.phone || '+256 755943973'}
                   </div>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-emerald-500 group-hover:text-emerald-300 shrink-0" />
+                <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[#0c791e]" />
               </a>
             </div>
           </div>
 
           {/* Right Column: Interactive Consultation Dispatch Form */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl">
-              <h3 className="text-lg font-bold text-white font-display mb-1">
+            <div className="rounded-[24px] border border-[#e2e8f0] bg-white p-6 shadow-[0_24px_60px_rgba(17,24,39,0.07)] sm:p-8">
+              <h3 className="mb-1 text-[20px] font-semibold text-[#111827]">
                 Send an Order Specification or Inquiry
               </h3>
-              <p className="text-xs text-slate-400 mb-6">
+              <p className="mb-6 text-[13px] leading-[1.6] text-[#5b6575]">
                 Fill out the form below with your garment requirements, quantity, and deadlines for a formal quote.
               </p>
 
               {submitSuccess ? (
-                <div className="p-8 rounded-xl bg-emerald-950/30 border border-emerald-800/60 text-center space-y-2">
-                  <Check className="w-10 h-10 text-emerald-400 mx-auto" />
-                  <h4 className="text-base font-semibold text-white">Inquiry Dispatched Successfully!</h4>
-                  <p className="text-xs text-slate-400">
+                <div className="space-y-2 rounded-[16px] border border-[#d9eadc] bg-[#eef7ef] p-8 text-center">
+                  <Check className="mx-auto h-10 w-10 text-[#0c791e]" />
+                  <h4 className="text-[16px] font-semibold text-[#111827]">Inquiry Dispatched Successfully!</h4>
+                  <p className="text-[13px] leading-[1.6] text-[#3f4a5a]">
                     Thank you for reaching out. Wilberforce will review your specifications and reply promptly.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSendMessage} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-mono text-slate-400 mb-1">
-                        YOUR NAME / ORGANIZATION
-                      </label>
+                      <label className={labelClass}>YOUR NAME / ORGANIZATION</label>
                       <input
                         type="text"
                         required
                         value={formName}
                         onChange={(e) => setFormName(e.target.value)}
                         placeholder="e.g. Ronald Kigozi (OXFAM Partner)"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-xs focus:outline-none focus:border-emerald-500 transition-colors"
+                        className="ds-input"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-slate-400 mb-1">
-                        EMAIL ADDRESS
-                      </label>
+                      <label className={labelClass}>EMAIL ADDRESS</label>
                       <input
                         type="email"
                         required
                         value={formEmail}
                         onChange={(e) => setFormEmail(e.target.value)}
                         placeholder="your.email@organization.org"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-xs focus:outline-none focus:border-emerald-500 transition-colors"
+                        className="ds-input"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1">
-                      PROJECT OR ORDER TYPE
-                    </label>
+                    <label className={labelClass}>PROJECT OR ORDER TYPE</label>
                     <input
                       type="text"
                       required
                       value={formSubject}
                       onChange={(e) => setFormSubject(e.target.value)}
                       placeholder="e.g. 500 High-Vis Reflector Vests + Event Running Kits"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-xs focus:outline-none focus:border-emerald-500 transition-colors"
+                      className="ds-input"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1">
-                      SPECIFICATIONS &amp; DEADLINE DETAILS
-                    </label>
+                    <label className={labelClass}>SPECIFICATIONS &amp; DEADLINE DETAILS</label>
                     <textarea
                       required
                       rows={5}
                       value={formMessage}
                       onChange={(e) => setFormMessage(e.target.value)}
                       placeholder="Specify garment types, quantities (e.g. 500 pcs), print technique (Screen / DTF / Embroidery), required delivery date, and whether vector artwork is ready..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-xs focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                      className="ds-input resize-none"
                     />
                   </div>
 
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="flex flex-col items-center justify-between gap-4 pt-2 sm:flex-row">
+                    <div className="flex items-center gap-1.5 text-[11px] text-[#5b6575]">
+                      <ShieldCheck className="h-3.5 w-3.5 text-[#0c791e]" />
                       <span>Direct line to Mubiru Wilberforce • Confidential inquiry</span>
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all shadow-md shadow-emerald-950 disabled:opacity-50"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#e07b0f] px-6 py-3 text-[13px] font-semibold text-white transition-colors hover:bg-[#f59e42] disabled:opacity-50 sm:w-auto"
                     >
                       {isSubmitting ? (
                         <span>Sending Dispatch...</span>
                       ) : (
                         <>
-                          <Send className="w-3.5 h-3.5" />
+                          <Send className="h-3.5 w-3.5" />
                           <span>Dispatch Order Request</span>
                         </>
                       )}

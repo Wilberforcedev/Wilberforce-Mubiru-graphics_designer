@@ -10,8 +10,6 @@ import {
   Menu,
   X,
   Sparkles,
-  ExternalLink,
-  ChevronDown,
   UserCheck,
   Linkedin,
   Instagram,
@@ -42,21 +40,17 @@ export const Navbar: React.FC<NavbarProps> = ({
       setIsScrolled(window.scrollY > 20);
 
       const sections = ['skills', 'repositories', 'architecture', 'prepress-studio', 'testimonials', 'experience', 'contact'];
+      let current = 'hero';
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 140 && rect.bottom >= 140) {
-            setActiveSection(sectionId);
-            return;
-          }
+        if (el && el.getBoundingClientRect().top <= 160) {
+          current = sectionId;
         }
       }
-      if (window.scrollY < 200) {
-        setActiveSection('hero');
-      }
+      setActiveSection(current);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -79,295 +73,267 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  const iconButton =
+    'items-center justify-center w-9 h-9 rounded-full border border-[#e2e8f0] bg-white text-[#5b6575] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]';
+
   return (
     <header
       id="main-navbar"
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#0a0d14]/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/30 py-3'
-          : 'bg-transparent py-5'
-      }`}
+      className="fixed top-0 left-0 right-0 z-40 px-3 pt-2 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-24 before:bg-gradient-to-b before:from-white/90 before:via-white/55 before:to-transparent sm:px-5 sm:pt-3"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand & Terminal Identifier */}
-        <div className="flex items-center gap-3">
+      <div
+        className={`relative mx-auto flex w-full max-w-[1280px] items-center justify-between gap-3 rounded-full border border-[#e2e8f0] bg-white/95 pl-3 pr-2 backdrop-blur-xl transition-all duration-300 sm:pl-5 ${
+          isScrolled
+            ? 'py-2 shadow-[0_16px_40px_rgba(17,24,39,0.1)]'
+            : 'py-2.5 shadow-[0_16px_40px_rgba(17,24,39,0.06)]'
+        }`}
+      >
+        {/* Brand */}
+        <div className="flex min-w-0 items-center gap-2">
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center gap-2.5 group cursor-pointer"
+            className="flex min-w-0 items-center gap-2.5"
           >
             <img
               src={currentProfile.avatar}
               alt=""
-              width={36}
-              height={36}
+              width={40}
+              height={40}
               decoding="async"
-              className="w-9 h-9 rounded-lg object-cover border border-emerald-500/40 shadow-sm shadow-emerald-950 group-hover:border-emerald-400/70 transition-all"
+              className="h-10 w-10 shrink-0 rounded-full border border-[#e2e8f0] object-cover"
             />
-            <div className="flex flex-col">
-              <span className="font-mono text-sm font-semibold text-slate-200 tracking-tight flex items-center gap-1">
-                <span className="text-emerald-400">{currentProfile.handle}</span>
-                <span className="text-slate-500">@</span>
-                <span className="text-cyan-400">
-                  {currentProfile.handle === 'wilberofficial' ? 'artist' : 'engineer'}
-                </span>
-                <span className="text-slate-600">:~$</span>
+            <span className="flex min-w-0 flex-col leading-tight">
+              <span className="truncate text-[15px] font-semibold tracking-[-0.01em] text-[#111827]">
+                {currentProfile.name}
               </span>
-              <span className="text-[11px] text-slate-400 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Active • {currentProfile.location}</span>
+              <span className="flex items-center gap-1.5 truncate text-[11px] text-[#5b6575]">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0c791e]" />
+                <span className="truncate">Active &middot; {currentProfile.location}</span>
               </span>
-            </div>
+            </span>
           </a>
 
-          {/* Identity Quick-Switcher Chip */}
           <button
             id="profile-toggle-pill"
             onClick={onToggleProfile}
             title="Switch between Wilberforce Mubiru and Tomoe profiles"
-            className="hidden lg:flex items-center gap-1.5 ml-2 px-2.5 py-1 rounded-full text-xs font-mono bg-slate-900/80 border border-slate-700/70 text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
+            className="ml-1 hidden items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-[#f5f5f7] px-3 py-1.5 text-[11px] font-medium text-[#3f4a5a] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f] md:flex"
           >
-            <UserCheck className="w-3 h-3 text-cyan-400" />
-            <span>Profile: <strong className="text-emerald-300 font-medium">{currentProfile.name}</strong></span>
-            <span className="text-[10px] text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded">Switch</span>
+            <UserCheck className="h-3.5 w-3.5 shrink-0" />
+            <span className="hidden 2xl:inline">Switch profile</span>
           </button>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-900/60 p-1 rounded-xl border border-slate-800/80 backdrop-blur-sm">
+        {/* Desktop links */}
+        <nav className="hidden items-center gap-0.5 xl:flex">
           {navLinks.map((link) => {
-            const Icon = link.icon;
             const isActive = activeSection === link.id;
             return (
               <button
                 key={link.id}
                 id={`nav-link-${link.id}`}
                 onClick={() => scrollTo(link.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`rounded-full px-3 py-2 text-[14px] font-medium transition-colors ${
                   isActive
-                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    ? 'bg-[#fdf2e5] text-[#e07b0f]'
+                    : 'text-[#3f4a5a] hover:bg-[#fdf2e5] hover:text-[#e07b0f]'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`} />
-                <span>{link.label}</span>
+                {link.label}
               </button>
             );
           })}
         </nav>
 
-        {/* Actions & Terminal Button */}
-        <div className="flex items-center gap-2">
-          {/* LinkedIn Profile */}
+        {/* Actions */}
+        <div className="flex shrink-0 items-center gap-1.5">
           {currentProfile.linkedinUrl && (
             <a
               id="nav-linkedin-link"
               href={currentProfile.linkedinUrl}
               target="_blank"
               rel="noreferrer"
-              className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-blue-400 border border-slate-800 hover:border-blue-500/40 transition-all"
+              className={`${iconButton} hidden lg:inline-flex`}
               title="LinkedIn: Wilberforce Mubiru"
             >
-              <Linkedin className="w-4 h-4" />
+              <Linkedin className="h-4 w-4" />
             </a>
           )}
 
-          {/* Instagram Profile */}
           {currentProfile.instagramUrl && (
             <a
               id="nav-instagram-link"
               href={currentProfile.instagramUrl}
               target="_blank"
               rel="noreferrer"
-              className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-pink-400 border border-slate-800 hover:border-pink-500/40 transition-all"
+              className={`${iconButton} hidden lg:inline-flex`}
               title="Instagram: @willinho23"
             >
-              <Instagram className="w-4 h-4" />
+              <Instagram className="h-4 w-4" />
             </a>
           )}
 
-          {/* GitHub Profile */}
           {currentProfile.githubUrl && (
             <a
               id="nav-github-link"
               href={currentProfile.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-700 transition-all"
+              className={`${iconButton} hidden lg:inline-flex`}
               title={`GitHub: @${currentProfile.handle}`}
             >
-              <Github className="w-4 h-4" />
+              <Github className="h-4 w-4" />
             </a>
           )}
 
-          {/* Quick WhatsApp Action if available */}
-          {currentProfile.whatsAppUrl && (
-            <a
-              id="nav-wa-link"
-              href={currentProfile.whatsAppUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 text-xs font-medium transition-all"
-              title="Chat on WhatsApp (+256 755943973)"
-            >
-              <span>WhatsApp</span>
-            </a>
-          )}
-
-          {/* Interactive Terminal Trigger */}
           <button
             id="open-terminal-btn"
             onClick={onOpenTerminal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/70 hover:bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600 text-xs font-mono transition-all"
-            title="Open Interactive Engineer Terminal"
+            className={`${iconButton} hidden sm:inline-flex`}
+            title="Open Interactive Engineer Terminal (Ctrl+K)"
           >
-            <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="hidden sm:inline">CLI</span>
-            <kbd className="hidden lg:inline-block px-1.5 py-0.5 text-[10px] bg-slate-900 border border-slate-700 rounded text-slate-400">
-              Ctrl+K
-            </kbd>
+            <Terminal className="h-4 w-4" />
           </button>
 
-          {/* Profile Details Edit / Customizer */}
           <button
             id="customize-profile-btn"
             onClick={onOpenCustomizer}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-slate-700 text-xs transition-all"
+            className={`${iconButton} hidden md:inline-flex`}
             title="Configure profile bio & links"
           >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Customize</span>
+            <Sparkles className="h-4 w-4" />
           </button>
 
-          {/* Hire Me CTA */}
           <button
             id="nav-cta-hire"
             onClick={() => scrollTo('contact')}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-all shadow-sm shadow-emerald-950 hover:shadow-emerald-900"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#e07b0f] px-4 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#f59e42]"
           >
-            <Mail className="w-3.5 h-3.5" />
+            <Mail className="h-4 w-4" />
             <span>Hire Me</span>
           </button>
 
-          {/* Mobile Menu Button */}
           <button
             id="mobile-nav-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 border border-slate-700"
+            className={`${iconButton} inline-flex xl:hidden`}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0d14]/95 border-b border-slate-800 backdrop-blur-xl px-4 pt-3 pb-5 mt-2 space-y-2">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-800/80">
-            <span className="text-xs text-slate-400 font-mono">Current Profile:</span>
-            <button
-              onClick={() => {
-                onToggleProfile();
-                setMobileMenuOpen(false);
-              }}
-              className="text-xs font-mono text-emerald-400 flex items-center gap-1 bg-emerald-950/40 px-2 py-1 rounded border border-emerald-800/60"
-            >
-              <UserCheck className="w-3 h-3" />
-              <span>{currentProfile.name} (Switch)</span>
-            </button>
-          </div>
+        {/* Mobile / tablet drawer */}
+        {mobileMenuOpen && (
+          <div className="absolute left-0 right-0 top-[calc(100%+10px)] rounded-[24px] border border-[#e2e8f0] bg-white p-3 shadow-[0_24px_60px_rgba(17,24,39,0.14)] xl:hidden">
+            <div className="flex items-center justify-between gap-3 rounded-2xl bg-[#f5f5f7] px-3 py-2.5">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#5b6575]">
+                Current profile
+              </span>
+              <button
+                onClick={() => {
+                  onToggleProfile();
+                  setMobileMenuOpen(false);
+                }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#e2e8f0] bg-white px-3 py-1.5 text-[12px] font-semibold text-[#0c791e]"
+              >
+                <UserCheck className="h-3.5 w-3.5" />
+                <span>{currentProfile.name} (Switch)</span>
+              </button>
+            </div>
 
-          <div className="grid grid-cols-2 gap-2 pt-2">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-xs font-medium text-left hover:border-emerald-500/50"
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollTo(link.id)}
+                    className="flex items-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-3 py-2.5 text-left text-[13px] font-medium text-[#3f4a5a] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]"
+                  >
+                    <Icon className="h-4 w-4 text-[#e07b0f]" />
+                    <span>{link.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-3 flex items-center gap-2">
+              <button
+                onClick={() => {
+                  onOpenTerminal();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-[#111827] bg-[#111827] py-2.5 text-[12px] font-semibold text-white"
+              >
+                <Terminal className="h-3.5 w-3.5" />
+                <span>Interactive CLI</span>
+              </button>
+              <button
+                onClick={() => {
+                  onOpenCustomizer();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-[#e2e8f0] bg-white py-2.5 text-[12px] font-semibold text-[#111827]"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-[#e07b0f]" />
+                <span>Customize</span>
+              </button>
+            </div>
+
+            <div className="mt-3 flex items-center justify-around border-t border-[#e2e8f0] pt-3 text-[12px] font-medium text-[#5b6575]">
+              {currentProfile.linkedinUrl && (
+                <a
+                  href={currentProfile.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#e07b0f]"
                 >
-                  <Icon className="w-4 h-4 text-emerald-400" />
-                  <span>{link.label}</span>
-                </button>
-              );
-            })}
+                  <Linkedin className="h-3.5 w-3.5" />
+                  <span>LinkedIn</span>
+                </a>
+              )}
+              {currentProfile.instagramUrl && (
+                <a
+                  href={currentProfile.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#e07b0f]"
+                >
+                  <Instagram className="h-3.5 w-3.5" />
+                  <span>Instagram</span>
+                </a>
+              )}
+              {currentProfile.githubUrl && (
+                <a
+                  href={currentProfile.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[#e07b0f]"
+                >
+                  <Github className="h-3.5 w-3.5" />
+                  <span>GitHub</span>
+                </a>
+              )}
+              {currentProfile.whatsAppUrl && (
+                <a
+                  href={currentProfile.whatsAppUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-[#0c791e]"
+                >
+                  <span>WhatsApp</span>
+                </a>
+              )}
+            </div>
           </div>
-
-          <div className="pt-2 flex items-center gap-2">
-            <button
-              onClick={() => {
-                onOpenTerminal();
-                setMobileMenuOpen(false);
-              }}
-              className="flex-1 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-mono flex items-center justify-center gap-1.5"
-            >
-              <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Interactive CLI</span>
-            </button>
-            <button
-              onClick={() => {
-                onOpenCustomizer();
-                setMobileMenuOpen(false);
-              }}
-              className="flex-1 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 text-xs flex items-center justify-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Customize</span>
-            </button>
-          </div>
-
-          {/* Mobile Social Links Row */}
-          <div className="pt-2 border-t border-slate-800 flex items-center justify-around text-xs font-mono text-slate-400">
-            {currentProfile.linkedinUrl && (
-              <a
-                href={currentProfile.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1 text-blue-400 hover:text-blue-300"
-              >
-                <Linkedin className="w-3.5 h-3.5" />
-                <span>LinkedIn</span>
-              </a>
-            )}
-            {currentProfile.instagramUrl && (
-              <a
-                href={currentProfile.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1 text-pink-400 hover:text-pink-300"
-              >
-                <Instagram className="w-3.5 h-3.5" />
-                <span>Instagram</span>
-              </a>
-            )}
-            {currentProfile.githubUrl && (
-              <a
-                href={currentProfile.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1 text-purple-400 hover:text-purple-300"
-              >
-                <Github className="w-3.5 h-3.5" />
-                <span>GitHub</span>
-              </a>
-            )}
-            {currentProfile.whatsAppUrl && (
-              <a
-                href={currentProfile.whatsAppUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300"
-              >
-                <span>WhatsApp</span>
-              </a>
-            )}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 };

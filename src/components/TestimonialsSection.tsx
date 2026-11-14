@@ -4,11 +4,8 @@ import {
   Star,
   CheckCircle2,
   PlusCircle,
-  Building2,
-  Calendar,
-  Sparkles,
-  Send,
   UserCheck,
+  Send,
 } from 'lucide-react';
 import { Testimonial } from '../types';
 
@@ -104,38 +101,36 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     }, 1500);
   };
 
+  const labelClass = 'mb-1 block text-[12px] font-medium text-[#3f4a5a]';
+
   return (
-    <section id="testimonials" className="py-20 border-b border-slate-800/80 bg-[#0a0d14] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="ds-section ds-section--panel">
+      <div className="ds-shell">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2 uppercase tracking-wider">
-              <MessageSquareQuote className="w-3.5 h-3.5" />
+        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div className="max-w-3xl">
+            <div className="ds-eyebrow mb-4">
+              <MessageSquareQuote className="h-3.5 w-3.5" />
               <span>Verified Client &amp; Peer Testimonials</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white font-display">
-              Endorsements &amp; Industry Trust
-            </h2>
-            <p className="mt-2 text-slate-400 max-w-2xl text-sm sm:text-base">
+            <h2 className="ds-h2">Endorsements &amp; Industry Trust</h2>
+            <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-[#5b6575]">
               Feedback from CTOs, security directors, and venture-backed founders on system reliability, low-latency performance, and anti-bot bypass execution.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              id="add-testimonial-btn"
-              onClick={() => setShowSubmitModal(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 text-xs font-medium transition-all shadow-sm"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Leave a Recommendation</span>
-            </button>
-          </div>
+          <button
+            id="add-testimonial-btn"
+            onClick={() => setShowSubmitModal(true)}
+            className="inline-flex items-center gap-2 self-start rounded-full border-2 border-[#e07b0f] px-4 py-2.5 text-[13px] font-semibold text-[#e07b0f] transition-colors hover:bg-[#e07b0f] hover:text-white md:self-auto"
+          >
+            <PlusCircle className="h-4 w-4" />
+            <span>Leave a Recommendation</span>
+          </button>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        <div className="mb-8 flex items-center gap-2 overflow-x-auto pb-1">
           {categories.map((cat) => {
             const isActive = selectedFilter === cat.id;
             return (
@@ -143,16 +138,16 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                 key={cat.id}
                 id={`testimonial-filter-${cat.id}`}
                 onClick={() => setSelectedFilter(cat.id)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+                className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-[12px] font-medium transition-colors ${
                   isActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm'
-                    : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    ? 'border-[#e07b0f] bg-[#e07b0f] text-white'
+                    : 'border-[#e2e8f0] bg-white text-[#3f4a5a] hover:border-[#e07b0f] hover:text-[#e07b0f]'
                 }`}
               >
                 <span>{cat.label}</span>
                 <span
-                  className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                    isActive ? 'bg-emerald-500/30 text-emerald-200' : 'bg-slate-800 text-slate-500'
+                  className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
+                    isActive ? 'bg-white/20 text-white' : 'bg-[#f5f5f7] text-[#5b6575]'
                   }`}
                 >
                   {cat.count}
@@ -163,62 +158,59 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredTestimonials.map((t) => (
             <div
               key={t.id}
               id={`testimonial-card-${t.id}`}
-              className="rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700/80 p-6 flex flex-col justify-between transition-all duration-200 hover:shadow-xl hover:shadow-black/40"
+              className="ds-card ds-card--hover flex flex-col justify-between p-6"
             >
               <div>
-                {/* Rating & Verified Badge */}
-                <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="mb-4 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-4 h-4 ${
-                          i < t.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-700'
+                        className={`h-4 w-4 ${
+                          i < t.rating ? 'fill-[#d9a419] text-[#d9a419]' : 'text-[#e2e8f0]'
                         }`}
                       />
                     ))}
                   </div>
 
                   {t.verified && (
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-800/70 text-[10px] font-mono text-emerald-300">
-                      <UserCheck className="w-3 h-3 text-emerald-400" />
+                    <div className="inline-flex items-center gap-1 rounded-full border border-[#d9eadc] bg-[#eef7ef] px-2 py-0.5 text-[10px] font-semibold text-[#0c791e]">
+                      <UserCheck className="h-3 w-3" />
                       <span>Verified Client</span>
                     </div>
                   )}
                 </div>
 
-                {/* Content Quote */}
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 italic">
+                <p className="mb-6 text-[13px] italic leading-[1.7] text-[#3f4a5a]">
                   &ldquo;{t.content}&rdquo;
                 </p>
               </div>
 
-              {/* Client Info & Project Tag */}
-              <div className="pt-4 border-t border-slate-800/70">
-                <div className="flex items-center gap-3 mb-2.5">
+              <div className="border-t border-[#e2e8f0] pt-4">
+                <div className="mb-2.5 flex items-center gap-3">
                   <img
                     src={t.avatarUrl}
                     alt={t.name}
-                    className="w-10 h-10 rounded-xl object-cover border border-slate-700"
+                    className="h-10 w-10 rounded-full border border-[#e2e8f0] object-cover"
                   />
                   <div>
-                    <h4 className="text-sm font-semibold text-white">{t.name}</h4>
-                    <p className="text-xs text-slate-400">
-                      {t.role} • <span className="text-slate-300">{t.company}</span>
+                    <h4 className="text-[14px] font-semibold text-[#111827]">{t.name}</h4>
+                    <p className="text-[12px] text-[#5b6575]">
+                      {t.role} • <span className="text-[#3f4a5a]">{t.company}</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1">
-                  <span className="text-emerald-400 truncate max-w-[200px]" title={t.projectDelivered}>
+                <div className="flex items-center justify-between gap-3 pt-1 text-[11px]">
+                  <span className="max-w-[200px] truncate font-medium text-[#e07b0f]" title={t.projectDelivered}>
                     ⚡ {t.projectDelivered}
                   </span>
-                  <span>{t.date}</span>
+                  <span className="shrink-0 text-[#8a93a1]">{t.date}</span>
                 </div>
               </div>
             </div>
@@ -229,77 +221,78 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         {showSubmitModal && (
           <div
             id="submit-testimonial-modal"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#111827]/50 p-4 backdrop-blur-sm"
             onClick={() => setShowSubmitModal(false)}
           >
             <div
-              className="relative w-full max-w-lg bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-4"
+              className="relative w-full max-w-lg space-y-4 rounded-[24px] border border-[#e2e8f0] bg-white p-6 shadow-[0_30px_80px_rgba(17,24,39,0.25)]"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white font-display">Add a Testimonial</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <h3 className="text-[18px] font-semibold text-[#111827]">Add a Testimonial</h3>
+                  <p className="mt-0.5 text-[12px] text-[#5b6575]">
                     Share feedback from an engineering collaboration or production delivery.
                   </p>
                 </div>
                 <button
                   onClick={() => setShowSubmitModal(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                  aria-label="Close"
+                  className="rounded-full border border-[#e2e8f0] px-2.5 py-1 text-sm text-[#5b6575] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]"
                 >
                   ✕
                 </button>
               </div>
 
               {formSuccess ? (
-                <div className="py-8 text-center space-y-2">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto animate-bounce" />
-                  <h4 className="text-base font-semibold text-white">Thank You for the Endorsement!</h4>
-                  <p className="text-xs text-slate-400">Your review has been verified and added to the dashboard.</p>
+                <div className="space-y-2 py-8 text-center">
+                  <CheckCircle2 className="mx-auto h-12 w-12 animate-bounce text-[#0c791e]" />
+                  <h4 className="text-[16px] font-semibold text-[#111827]">Thank You for the Endorsement!</h4>
+                  <p className="text-[12px] text-[#5b6575]">Your review has been verified and added to the dashboard.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmitTestimonial} className="space-y-3.5">
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">Your Name *</label>
+                      <label className={labelClass}>Your Name *</label>
                       <input
                         type="text"
                         required
                         value={formName}
                         onChange={(e) => setFormName(e.target.value)}
                         placeholder="e.g. Sarah Jenkins"
-                        className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-emerald-500"
+                        className="ds-input"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">Your Role</label>
+                      <label className={labelClass}>Your Role</label>
                       <input
                         type="text"
                         value={formRole}
                         onChange={(e) => setFormRole(e.target.value)}
                         placeholder="e.g. VP of Engineering"
-                        className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-emerald-500"
+                        className="ds-input"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">Company / Team</label>
+                      <label className={labelClass}>Company / Team</label>
                       <input
                         type="text"
                         value={formCompany}
                         onChange={(e) => setFormCompany(e.target.value)}
                         placeholder="e.g. Apex Scale AI"
-                        className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-emerald-500"
+                        className="ds-input"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">Project Category</label>
+                      <label className={labelClass}>Project Category</label>
                       <select
                         value={formCategory}
                         onChange={(e) => setFormCategory(e.target.value as any)}
-                        className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-emerald-500"
+                        className="ds-input"
                       >
                         <option value="security">Security &amp; Anti-Bot</option>
                         <option value="ai-startups">AI &amp; LLM Startups</option>
@@ -310,62 +303,62 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1">Project Delivered</label>
+                    <label className={labelClass}>Project Delivered</label>
                     <input
                       type="text"
                       value={formProject}
                       onChange={(e) => setFormProject(e.target.value)}
                       placeholder="e.g. Go Anti-Bot Proxy Mesh / RAG Pipeline"
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-emerald-500"
+                      className="ds-input"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1">Rating</label>
+                    <label className={labelClass}>Rating</label>
                     <div className="flex items-center gap-1.5">
                       {[1, 2, 3, 4, 5].map((num) => (
                         <button
                           key={num}
                           type="button"
                           onClick={() => setFormRating(num)}
-                          className="p-1 text-slate-600 hover:text-amber-400"
+                          className="p-1"
                         >
                           <Star
-                            className={`w-5 h-5 ${
-                              num <= formRating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'
+                            className={`h-5 w-5 ${
+                              num <= formRating ? 'fill-[#d9a419] text-[#d9a419]' : 'text-[#d5dbe3]'
                             }`}
                           />
                         </button>
                       ))}
-                      <span className="text-xs font-mono text-slate-400 ml-2">{formRating}.0 / 5.0</span>
+                      <span className="ml-2 text-[12px] font-medium text-[#5b6575]">{formRating}.0 / 5.0</span>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1">Recommendation / Review *</label>
+                    <label className={labelClass}>Recommendation / Review *</label>
                     <textarea
                       required
                       rows={4}
                       value={formContent}
                       onChange={(e) => setFormContent(e.target.value)}
                       placeholder="Describe the engineering challenge, Tomoe's solution, and overall delivery outcome..."
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-emerald-500"
+                      className="ds-input resize-none"
                     />
                   </div>
 
-                  <div className="pt-2 flex items-center justify-end gap-2">
+                  <div className="flex items-center justify-end gap-2 pt-2">
                     <button
                       type="button"
                       onClick={() => setShowSubmitModal(false)}
-                      className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs"
+                      className="rounded-full border border-[#e2e8f0] bg-white px-4 py-2 text-[12px] font-semibold text-[#3f4a5a] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-all"
+                      className="flex items-center gap-1.5 rounded-full bg-[#e07b0f] px-4 py-2 text-[12px] font-semibold text-white transition-colors hover:bg-[#f59e42]"
                     >
-                      <Send className="w-3.5 h-3.5" />
+                      <Send className="h-3.5 w-3.5" />
                       <span>Post Recommendation</span>
                     </button>
                   </div>

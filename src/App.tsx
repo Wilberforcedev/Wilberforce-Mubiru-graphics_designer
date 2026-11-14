@@ -17,8 +17,6 @@ import { Footer } from './components/Footer';
 import { InteractiveTerminal } from './components/InteractiveTerminal';
 import { ProfileCustomizerModal } from './components/ProfileCustomizerModal';
 import { CommandPaletteModal } from './components/CommandPaletteModal';
-import { DynamicBackgroundCanvas } from './components/DynamicBackgroundCanvas';
-import { LiveTelemetryHud } from './components/LiveTelemetryHud';
 import { GraphicsPortfolioSection } from './components/GraphicsPortfolioSection';
 
 import {
@@ -98,10 +96,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0d14] text-slate-100 flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200 relative overflow-x-hidden">
-      {/* Ambient Particle Matrix Background */}
-      <DynamicBackgroundCanvas />
-
+    <div className="min-h-screen bg-white text-[#111827] flex flex-col selection:bg-[#fdf2e5] selection:text-[#111827] relative overflow-x-hidden">
       {/* Top Sticky Navigation Bar */}
       <Navbar
         currentProfile={profile}
@@ -111,7 +106,7 @@ export default function App() {
       />
 
       {/* Main Content Sections */}
-      <main className="flex-1 relative z-10">
+      <main className="flex-1">
         {/* 1. Hero & Value Proposition */}
         <HeroSection
           profile={profile}
@@ -149,9 +144,6 @@ export default function App() {
 
       {/* Footer */}
       <Footer profile={profile} />
-
-      {/* Real-Time Telemetry HUD Overlay */}
-      <LiveTelemetryHud profile={profile} />
 
       {/* Interactive CLI Terminal Drawer */}
       <InteractiveTerminal

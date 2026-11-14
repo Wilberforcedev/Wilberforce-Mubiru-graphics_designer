@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Terminal as TerminalIcon, X, Maximize2, Minimize2, CornerDownLeft, Sparkles } from 'lucide-react';
+import { Terminal as TerminalIcon, X, Maximize2, Minimize2, CornerDownLeft } from 'lucide-react';
 import { UserProfile, CodeRepository, TechnicalSkill } from '../types';
 
 interface InteractiveTerminalProps {
@@ -224,38 +224,46 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   return (
     <div
       id="terminal-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#111827]/40 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
         className={`relative w-full ${
           isExpanded ? 'max-w-6xl h-[85vh]' : 'max-w-3xl h-[560px]'
-        } bg-[#0b0f19] border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col font-mono transition-all duration-200`}
+        } bg-[#0f172a] border border-[#111827]/25 rounded-[24px] shadow-[0_24px_80px_-20px_rgba(17,24,39,0.55)] overflow-hidden flex flex-col font-mono transition-all duration-200`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Terminal Title Bar */}
-        <div className="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between select-none">
+        <div className="px-4 py-3 bg-white border-b border-[#e2e8f0] flex items-center justify-between select-none">
           <div className="flex items-center gap-2">
-            <button onClick={onClose} className="w-3 h-3 rounded-full bg-red-500 hover:opacity-80 transition-opacity" />
-            <button onClick={() => setIsExpanded(!isExpanded)} className="w-3 h-3 rounded-full bg-amber-500 hover:opacity-80 transition-opacity" />
-            <div className="w-3 h-3 rounded-full bg-emerald-500 opacity-60" />
-            <span className="text-xs text-slate-400 ml-2 flex items-center gap-1.5">
-              <TerminalIcon className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{profile.handle.toLowerCase()}@production-cli: ~</span>
+            <button
+              onClick={onClose}
+              aria-label="Close terminal"
+              className="w-3 h-3 rounded-full bg-red-400 hover:opacity-80 transition-opacity"
+            />
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              aria-label={isExpanded ? 'Collapse terminal' : 'Expand terminal'}
+              className="w-3 h-3 rounded-full bg-amber-400 hover:opacity-80 transition-opacity"
+            />
+            <div className="w-3 h-3 rounded-full bg-[#0c791e]/60" />
+            <span className="text-xs text-[#5b6575] ml-2 flex items-center gap-1.5">
+              <TerminalIcon className="w-3.5 h-3.5 text-[#e07b0f]" />
+              <span className="text-[#111827]">{profile.handle.toLowerCase()}@production-cli: ~</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-slate-400">
+          <div className="flex items-center gap-2 text-[#5b6575]">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1 hover:text-white transition-colors"
+              className="p-1 hover:text-[#111827] transition-colors"
               title={isExpanded ? 'Collapse' : 'Expand'}
             >
               {isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
             </button>
             <button
               onClick={onClose}
-              className="p-1 hover:text-white transition-colors"
+              className="p-1 hover:text-[#111827] transition-colors"
               title="Close Terminal"
             >
               <X className="w-4 h-4" />
@@ -283,7 +291,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         {/* Command Input Form */}
         <form
           onSubmit={handleCommand}
-          className="p-3 bg-slate-950 border-t border-slate-800 flex items-center gap-2 text-xs"
+          className="p-3 bg-[#0b1220] border-t border-white/10 flex items-center gap-2 text-xs"
         >
           <span className="text-emerald-400 font-bold pl-2">➜</span>
           <span className="text-cyan-400 font-semibold">{profile.name.toLowerCase()}:$</span>
@@ -298,7 +306,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           />
           <button
             type="submit"
-            className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] flex items-center gap-1"
+            className="px-2.5 py-1.5 rounded-full bg-[#e07b0f] hover:bg-[#f59e42] text-white text-[11px] flex items-center gap-1 transition-colors"
           >
             <span>Enter</span>
             <CornerDownLeft className="w-3 h-3" />

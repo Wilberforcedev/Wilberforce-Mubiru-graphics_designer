@@ -15,18 +15,15 @@ import {
   Boxes,
   LayoutGrid,
   Activity,
-  CheckCircle2,
-  Sparkles,
-  ChevronRight,
-  Code2,
-  Filter,
   Palette,
   Printer,
   Brush,
   Globe,
   Scissors,
+  Sparkles,
+  Code2,
 } from 'lucide-react';
-import { TechnicalSkill, SkillCategory } from '../types';
+import { TechnicalSkill } from '../types';
 
 interface SkillsSectionProps {
   skills: TechnicalSkill[];
@@ -91,31 +88,29 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
   };
 
   return (
-    <section id="skills" className="py-20 border-b border-slate-800/80 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="ds-section">
+      <div className="ds-shell">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2 uppercase tracking-wider">
-              <Cpu className="w-3.5 h-3.5" />
+        <div className="mb-10 flex flex-col justify-between gap-5 md:mb-12 md:flex-row md:items-end">
+          <div className="max-w-3xl">
+            <div className="ds-eyebrow mb-4">
+              <Cpu className="h-3.5 w-3.5" />
               <span>Technical Capabilities &amp; Architecture Matrix</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white font-display">
-              Engineered for Extreme Reliability &amp; Precision
-            </h2>
-            <p className="mt-2 text-slate-400 max-w-2xl text-sm sm:text-base">
+            <h2 className="ds-h2">Engineered for Extreme Reliability &amp; Precision</h2>
+            <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-[#5b6575]">
               A comprehensive breakdown of core proficiencies across protocol reverse engineering, distributed automation, autonomous AI agent pipelines, and high-load backend infrastructure.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-400 self-start md:self-auto">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 self-start rounded-full border border-[#d9eadc] bg-[#eef7ef] px-3.5 py-2 text-[12px] font-medium text-[#0c791e] md:self-auto">
+            <Sparkles className="h-3.5 w-3.5" />
             <span>Tested in High-Stress Production Environments</span>
           </div>
         </div>
 
         {/* Category Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        <div className="mb-8 flex items-center gap-2 overflow-x-auto pb-1">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat.id;
             return (
@@ -123,16 +118,16 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
                 key={cat.id}
                 id={`skill-filter-${cat.id}`}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+                className={`inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-[13px] font-medium transition-colors ${
                   isActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm'
-                    : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700'
+                    ? 'border-[#e07b0f] bg-[#e07b0f] text-white'
+                    : 'border-[#e2e8f0] bg-white text-[#3f4a5a] hover:border-[#e07b0f] hover:text-[#e07b0f]'
                 }`}
               >
                 <span>{cat.label}</span>
                 <span
-                  className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                    isActive ? 'bg-emerald-500/30 text-emerald-200' : 'bg-slate-800 text-slate-500'
+                  className={`rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
+                    isActive ? 'bg-white/20 text-white' : 'bg-[#f5f5f7] text-[#5b6575]'
                   }`}
                 >
                   {cat.count}
@@ -143,7 +138,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
         </div>
 
         {/* Skills Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {filteredSkills.map((skill) => {
             const IconComponent = getIcon(skill.iconName);
             return (
@@ -151,60 +146,52 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
                 key={skill.id}
                 id={`skill-card-${skill.id}`}
                 onClick={() => setActiveSkillModal(skill)}
-                className="group relative rounded-2xl bg-slate-900/50 hover:bg-slate-900/80 border border-slate-800/80 hover:border-emerald-500/40 p-5 transition-all duration-200 flex flex-col justify-between cursor-pointer hover:shadow-xl hover:shadow-emerald-950/20"
+                className="ds-card ds-card--hover group flex cursor-pointer flex-col justify-between p-5"
               >
                 <div>
-                  {/* Top Bar */}
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-slate-800/90 border border-slate-700/60 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500/50 group-hover:bg-emerald-500/10 transition-colors">
-                      <IconComponent className="w-5 h-5" />
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#f5dcc1] bg-[#fdf2e5] text-[#e07b0f] transition-colors group-hover:border-[#e07b0f]/50">
+                      <IconComponent className="h-5 w-5" />
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300 border border-slate-700">
+                      <span className="rounded-full border border-[#e2e8f0] bg-white px-2 py-0.5 text-[10px] font-medium text-[#5b6575]">
                         {skill.yearsOfExp} Yrs Exp
                       </span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-950/70 text-emerald-300 border border-emerald-800/80">
+                      <span className="rounded-full border border-[#d9eadc] bg-[#eef7ef] px-2 py-0.5 text-[10px] font-semibold text-[#0c791e]">
                         {skill.proficiency}%
                       </span>
                     </div>
                   </div>
 
-                  {/* Title & Highlight */}
-                  <h3 className="text-base font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                  <h3 className="text-base font-semibold text-[#111827] transition-colors group-hover:text-[#e07b0f]">
                     {skill.name}
                   </h3>
 
-                  <p className="text-xs text-emerald-400/90 font-mono mt-1 mb-2 line-clamp-1">
+                  <p className="mb-2 mt-1 line-clamp-1 text-[12px] font-medium text-[#e07b0f]">
                     ⚡ {skill.highlight}
                   </p>
 
-                  <p className="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-2">
+                  <p className="mb-4 line-clamp-2 text-[13px] leading-[1.6] text-[#5b6575]">
                     {skill.description}
                   </p>
                 </div>
 
-                {/* Bottom Tags & Visual Progress */}
-                <div className="pt-3 border-t border-slate-800/60 space-y-3">
-                  {/* Proficiency Bar */}
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div className="space-y-3 border-t border-[#e2e8f0] pt-3">
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#f0f2f5]">
                     <div
-                      className="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full rounded-full transition-all duration-500"
+                      className="h-full rounded-full bg-[linear-gradient(90deg,#e07b0f,#0c791e)] transition-all duration-500"
                       style={{ width: `${skill.proficiency}%` }}
                     />
                   </div>
 
-                  {/* Tags Pill List */}
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {skill.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-950/60 text-slate-400 border border-slate-800"
-                      >
+                      <span key={tag} className="ds-tag">
                         {tag}
                       </span>
                     ))}
                     {skill.tags.length > 3 && (
-                      <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800/50 text-slate-500">
+                      <span className="rounded-full bg-[#f5f5f7] px-2 py-1 text-[10px] font-medium text-[#8a93a1]">
                         +{skill.tags.length - 3}
                       </span>
                     )}
@@ -219,49 +206,50 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
         {activeSkillModal && (
           <div
             id="skill-detail-modal"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#111827]/45 p-4 backdrop-blur-sm"
             onClick={() => setActiveSkillModal(null)}
           >
             <div
-              className="relative w-full max-w-lg bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-5"
+              className="relative w-full max-w-lg space-y-5 rounded-[24px] border border-[#e2e8f0] bg-white p-6 shadow-[0_30px_80px_rgba(17,24,39,0.2)]"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#f5dcc1] bg-[#fdf2e5] text-[#e07b0f]">
                     {React.createElement(getIcon(activeSkillModal.iconName), { className: 'w-6 h-6' })}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">{activeSkillModal.name}</h3>
-                    <p className="text-xs text-slate-400 font-mono capitalize">
+                    <h3 className="text-lg font-semibold text-[#111827]">{activeSkillModal.name}</h3>
+                    <p className="text-[12px] capitalize text-[#5b6575]">
                       Category: {activeSkillModal.category.replace('-', ' ')}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => setActiveSkillModal(null)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                  aria-label="Close"
+                  className="rounded-full border border-[#e2e8f0] px-2.5 py-1 text-sm text-[#5b6575] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-emerald-300">
+              <div className="rounded-xl border border-[#f5dcc1] bg-[#fdf2e5] p-3.5 text-[13px] font-medium text-[#a85c0b]">
                 ⭐ Highlight: {activeSkillModal.highlight}
               </div>
 
               <div className="space-y-1">
-                <div className="text-xs font-semibold text-slate-300">Architectural Context &amp; Production Use:</div>
-                <p className="text-sm text-slate-400 leading-relaxed">{activeSkillModal.description}</p>
+                <div className="text-[13px] font-semibold text-[#111827]">Architectural Context &amp; Production Use:</div>
+                <p className="text-[14px] leading-[1.7] text-[#5b6575]">{activeSkillModal.description}</p>
               </div>
 
               <div>
-                <div className="text-xs font-semibold text-slate-300 mb-2">Core Tools &amp; Technologies:</div>
+                <div className="mb-2 text-[13px] font-semibold text-[#111827]">Core Tools &amp; Technologies:</div>
                 <div className="flex flex-wrap gap-2">
                   {activeSkillModal.tags.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-950/40 text-emerald-300 border border-emerald-800/60"
+                      className="rounded-full border border-[#d9eadc] bg-[#eef7ef] px-2.5 py-1 text-[12px] font-medium text-[#0c791e]"
                     >
                       {t}
                     </span>
@@ -269,9 +257,9 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                <span>Production Proficiency: <strong className="text-emerald-400">{activeSkillModal.proficiency}%</strong></span>
-                <span>Experience: <strong className="text-white">{activeSkillModal.yearsOfExp} Years</strong></span>
+              <div className="flex items-center justify-between border-t border-[#e2e8f0] pt-3 text-[13px] text-[#5b6575]">
+                <span>Production Proficiency: <strong className="text-[#e07b0f]">{activeSkillModal.proficiency}%</strong></span>
+                <span>Experience: <strong className="text-[#111827]">{activeSkillModal.yearsOfExp} Years</strong></span>
               </div>
             </div>
           </div>

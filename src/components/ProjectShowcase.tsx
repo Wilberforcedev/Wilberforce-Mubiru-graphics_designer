@@ -12,14 +12,12 @@ import {
   Zap,
   GitFork,
   BellRing,
-  ArrowRight,
   TrendingUp,
   Server,
   Layers,
   Cpu,
   Boxes,
   LayoutGrid,
-  ExternalLink,
   ZoomIn,
   X,
   MessageCircle,
@@ -68,33 +66,31 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
   const photoPlates = projects.filter((p) => p.image);
 
   return (
-    <section id="architecture" className="py-20 border-b border-slate-800/80 bg-[#0a0d14] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="architecture" className="ds-section">
+      <div className="ds-shell">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-2 uppercase tracking-wider">
-              <Code2 className="w-3.5 h-3.5" />
+        <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div className="max-w-3xl">
+            <div className="ds-eyebrow mb-4">
+              <Code2 className="h-3.5 w-3.5" />
               <span>Real Production Output &amp; Case Studies</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white font-display">
-              Featured Work &amp; Production Plates
-            </h2>
-            <p className="mt-2 text-slate-400 max-w-2xl text-sm sm:text-base">
+            <h2 className="ds-h2">Featured Work &amp; Production Plates</h2>
+            <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-[#5b6575]">
               Every plate is real production work for international NGOs (OXFAM, UKaid, Belgium, Plan), major athletic runs, and eco-initiatives. Tap any plate to inspect full resolution.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-900/80 border border-slate-800 px-3 py-2 rounded-xl">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div className="inline-flex items-center gap-2 self-start rounded-full border border-[#d9eadc] bg-[#eef7ef] px-3.5 py-2 text-[12px] font-medium text-[#0c791e] md:self-auto">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[#0c791e]" />
             <span>Kampala • Bulk Delivery Active</span>
           </div>
         </div>
 
-        {/* 1. Interactive Visual Plate Grid (Matching mubiruwilberforce.netlify.app) */}
+        {/* 1. Interactive Visual Plate Grid */}
         {photoPlates.length > 0 && (
-          <div className="mb-16">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-14">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {photoPlates.map((plate) => (
                 <div
                   key={plate.id}
@@ -108,45 +104,41 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                       tag: plate.tag,
                     });
                   }}
-                  className={`group relative rounded-2xl overflow-hidden bg-slate-900/90 border transition-all cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-emerald-950/40 ${
+                  className={`ds-card ds-card--hover group relative cursor-pointer overflow-hidden ${
                     plate.id === activeProject.id
-                      ? 'border-emerald-500/60 ring-2 ring-emerald-500/20'
-                      : 'border-slate-800 hover:border-slate-700'
+                      ? 'border-[#e07b0f] ring-2 ring-[#e07b0f]/15'
+                      : ''
                   }`}
                 >
-                  {/* Photo Container */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-950">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f5f5f7]">
                     <img
                       src={plate.image}
                       alt={plate.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/35 via-transparent to-transparent" />
 
-                    {/* Tag Badge */}
                     {plate.tag && (
-                      <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-950/80 border border-slate-700 text-emerald-300 backdrop-blur-sm shadow">
+                      <div className="absolute left-3 top-3 rounded-full border border-white/40 bg-white/95 px-2.5 py-1 text-[11px] font-semibold text-[#a85c0b] shadow-sm backdrop-blur-sm">
                         {plate.tag}
                       </div>
                     )}
 
-                    {/* Zoom Icon overlay */}
-                    <div className="absolute bottom-3 right-3 p-2 rounded-xl bg-slate-950/80 text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm border border-slate-700">
-                      <ZoomIn className="w-4 h-4 text-emerald-400" />
+                    <div className="absolute bottom-3 right-3 rounded-full bg-white/95 p-2 text-[#111827] opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+                      <ZoomIn className="h-4 w-4 text-[#e07b0f]" />
                     </div>
                   </div>
 
-                  {/* Card Content */}
-                  <div className="p-4 space-y-1.5">
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
-                      <span className="text-emerald-400 font-medium">{plate.category}</span>
-                      <span>{plate.benchmarks[0]?.value}</span>
+                  <div className="space-y-1.5 p-4">
+                    <div className="flex items-center justify-between text-[11px] font-medium">
+                      <span className="text-[#e07b0f]">{plate.category}</span>
+                      <span className="text-[#8a93a1]">{plate.benchmarks[0]?.value}</span>
                     </div>
-                    <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1">
+                    <h3 className="line-clamp-1 text-[15px] font-semibold text-[#111827] transition-colors group-hover:text-[#e07b0f]">
                       {plate.title}
                     </h3>
-                    <p className="text-xs text-slate-400 line-clamp-2">
+                    <p className="line-clamp-2 text-[12px] leading-[1.6] text-[#5b6575]">
                       {plate.caption || plate.tagline}
                     </p>
                   </div>
@@ -157,20 +149,16 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
         )}
 
         {/* 2. Flagship Production Case Studies & Architecture Breakdown */}
-        <div className="pt-6">
-          <div className="mb-6 flex items-center justify-between">
-            <div>
-              <div className="text-xs font-mono text-cyan-400 uppercase tracking-wider mb-1">
-                Detailed Case Studies
-              </div>
-              <h3 className="text-2xl font-bold text-white font-display">
-                Production Architecture &amp; Delivery Workflows
-              </h3>
-            </div>
+        <div className="pt-2">
+          <div className="mb-6">
+            <div className="ds-eyebrow ds-eyebrow--plain mb-1 text-[11px]">Detailed Case Studies</div>
+            <h3 className="text-[clamp(22px,3vw,30px)] font-medium tracking-[-0.02em] text-[#111827]">
+              Production Architecture &amp; Delivery Workflows
+            </h3>
           </div>
 
           {/* Project Selector Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 scrollbar-none">
+          <div className="mb-8 flex items-center gap-2 overflow-x-auto pb-1">
             {projects.map((proj) => {
               const isActive = proj.id === activeProject.id;
               return (
@@ -178,13 +166,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                   key={proj.id}
                   id={`arch-tab-${proj.id}`}
                   onClick={() => setActiveProjectId(proj.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+                  className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-[13px] font-medium transition-colors ${
                     isActive
-                      ? 'bg-slate-800 text-emerald-300 border border-emerald-500/40 shadow-sm'
-                      : 'bg-slate-900/70 text-slate-400 hover:text-slate-200 border border-slate-800/80 hover:border-slate-700'
+                      ? 'border-[#e07b0f] bg-[#e07b0f] text-white'
+                      : 'border-[#e2e8f0] bg-white text-[#3f4a5a] hover:border-[#e07b0f] hover:text-[#e07b0f]'
                   }`}
                 >
-                  <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-emerald-400' : 'bg-slate-600'}`} />
+                  <span className={`h-2 w-2 rounded-full ${isActive ? 'bg-white' : 'bg-[#0c791e]'}`} />
                   <span>{proj.title}</span>
                 </button>
               );
@@ -193,143 +181,126 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
 
           {/* Active Project Card */}
           {activeProject && (
-            <div className="rounded-3xl bg-slate-900/60 border border-slate-800/90 overflow-hidden shadow-2xl">
+            <div className="overflow-hidden rounded-[24px] border border-[#e2e8f0] bg-white shadow-[0_24px_60px_rgba(17,24,39,0.07)]">
               {/* Top Bar */}
-              <div className="p-6 sm:p-8 bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border-b border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div className="flex flex-col justify-between gap-4 border-b border-[#e2e8f0] bg-[linear-gradient(135deg,#faf8f4,#ffffff_60%,#fdf2e5)] p-6 sm:p-8 lg:flex-row lg:items-center">
                 <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-2 font-mono text-xs text-emerald-400">
-                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                  <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium text-[#5b6575]">
+                    <span className="rounded-full border border-[#f5dcc1] bg-[#fdf2e5] px-2.5 py-0.5 font-semibold text-[#a85c0b]">
                       {activeProject.category}
                     </span>
-                    <span>•</span>
-                    <span className="text-slate-400">{activeProject.clientOrContext}</span>
-                    <span>•</span>
-                    <span className="text-slate-400">{activeProject.duration}</span>
+                    <span className="text-[#c3cad4]">•</span>
+                    <span>{activeProject.clientOrContext}</span>
+                    <span className="text-[#c3cad4]">•</span>
+                    <span>{activeProject.duration}</span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white font-display">
+                  <h3 className="text-[clamp(22px,3vw,30px)] font-medium tracking-[-0.02em] text-[#111827]">
                     {activeProject.title}
                   </h3>
-                  <p className="text-sm text-slate-400 mt-1">{activeProject.tagline}</p>
+                  <p className="mt-1 text-[14px] text-[#5b6575]">{activeProject.tagline}</p>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 self-start lg:self-auto">
+                <div className="flex flex-wrap gap-1.5 self-start lg:max-w-[40%] lg:justify-end lg:self-auto">
                   {activeProject.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-lg text-xs font-mono bg-slate-800/90 text-slate-300 border border-slate-700"
-                    >
+                    <span key={tech} className="ds-tag bg-white">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Content Body: Problem vs Solution & Benchmarks */}
-              <div className="p-6 sm:p-8 space-y-8">
-                {/* Visual split if image exists */}
+              {/* Content Body */}
+              <div className="space-y-8 p-6 sm:p-8">
                 {activeProject.image && (
-                  <div className="p-4 rounded-2xl bg-slate-950/90 border border-slate-800/80 flex flex-col sm:flex-row items-center gap-5">
+                  <div className="flex flex-col items-center gap-5 rounded-[20px] border border-[#e2e8f0] bg-[#faf8f4] p-4 sm:flex-row">
                     <img
                       src={activeProject.image}
                       alt={activeProject.title}
-                      className="w-full sm:w-48 h-36 rounded-xl object-cover border border-slate-800 shadow"
+                      className="h-36 w-full rounded-xl border border-[#e2e8f0] object-cover shadow-sm sm:w-48"
                     />
                     <div className="space-y-2 text-left">
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800">
-                        <CheckCircle2 className="w-3 h-3" />
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-[#d9eadc] bg-[#eef7ef] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#0c791e]">
+                        <CheckCircle2 className="h-3 w-3" />
                         <span>Production Verified Specimen</span>
                       </div>
-                      <h4 className="text-base font-semibold text-white">
-                        {activeProject.title}
-                      </h4>
-                      <p className="text-xs text-slate-400">
+                      <h4 className="text-[16px] font-semibold text-[#111827]">{activeProject.title}</h4>
+                      <p className="text-[12px] leading-[1.6] text-[#5b6575]">
                         {activeProject.caption || activeProject.tagline}
                       </p>
                       <a
                         href={`https://wa.me/256755943973?text=${encodeURIComponent(`Hi Wilberforce, inquiring about ${activeProject.title}`)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#0c791e] transition-colors hover:text-[#0a6418]"
                       >
-                        <MessageCircle className="w-3.5 h-3.5" />
+                        <MessageCircle className="h-3.5 w-3.5" />
                         <span>Inquire about similar bulk order on WhatsApp</span>
                       </a>
                     </div>
                   </div>
                 )}
 
-                {/* Problem vs Solution Split */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="p-5 rounded-2xl bg-red-950/15 border border-red-900/30">
-                    <div className="text-xs font-mono uppercase text-red-400 mb-2 font-semibold">
+                {/* Problem vs Solution */}
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                  <div className="rounded-[20px] border border-[#f3d4d4] bg-[#fdf3f3] p-5">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#a24444]">
                       The Production Challenge
                     </div>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {activeProject.problem}
-                    </p>
+                    <p className="text-[13px] leading-[1.7] text-[#4a3a3a]">{activeProject.problem}</p>
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-emerald-950/15 border border-emerald-900/30">
-                    <div className="text-xs font-mono uppercase text-emerald-400 mb-2 font-semibold">
+                  <div className="rounded-[20px] border border-[#d9eadc] bg-[#eef7ef] p-5">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0c791e]">
                       The Engineered Solution
                     </div>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {activeProject.solution}
-                    </p>
+                    <p className="text-[13px] leading-[1.7] text-[#2f4636]">{activeProject.solution}</p>
                   </div>
                 </div>
 
-                {/* Benchmarks Counter Grid */}
+                {/* Benchmarks */}
                 <div>
-                  <div className="text-xs font-mono text-cyan-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <TrendingUp className="w-3.5 h-3.5" />
+                  <div className="mb-3 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#e07b0f]">
+                    <TrendingUp className="h-3.5 w-3.5" />
                     <span>Quality Metrics &amp; Delivery Benchmarks</span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     {activeProject.benchmarks.map((bm) => (
-                      <div
-                        key={bm.label}
-                        className="p-4 rounded-xl bg-slate-950 border border-slate-800/80"
-                      >
-                        <div className="text-xs text-slate-400 mb-1">{bm.label}</div>
-                        <div className="text-2xl font-bold font-mono text-emerald-300">
-                          {bm.value}
-                        </div>
-                        <div className="text-[11px] text-slate-500 mt-1">{bm.sublabel}</div>
+                      <div key={bm.label} className="rounded-xl border border-[#e2e8f0] bg-[#f5f5f7] p-4">
+                        <div className="mb-1 text-[11px] font-medium text-[#5b6575]">{bm.label}</div>
+                        <div className="text-[24px] font-semibold tracking-[-0.02em] text-[#0c791e]">{bm.value}</div>
+                        <div className="mt-1 text-[11px] text-[#8a93a1]">{bm.sublabel}</div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Architecture Workflow Flow */}
+                {/* Workflow */}
                 <div>
-                  <div className="text-xs font-mono text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-1.5">
-                    <Network className="w-3.5 h-3.5" />
+                  <div className="mb-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0c791e]">
+                    <Network className="h-3.5 w-3.5" />
                     <span>Production Execution Pipeline</span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {activeProject.architectureWorkflow.map((step, idx) => {
                       const StepIcon = getStepIcon(step.icon);
                       return (
                         <div
                           key={step.title}
-                          className="relative p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 group hover:border-emerald-500/40 transition-colors"
+                          className="group space-y-2 rounded-xl border border-[#e2e8f0] bg-[#faf8f4] p-4 transition-colors hover:border-[#e07b0f]/50"
                         >
                           <div className="flex items-center justify-between">
-                            <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500/10">
-                              <StepIcon className="w-4 h-4" />
+                            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#f5dcc1] bg-[#fdf2e5] text-[#e07b0f]">
+                              <StepIcon className="h-4 w-4" />
                             </div>
-                            <span className="text-[10px] font-mono text-slate-500">
+                            <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8a93a1]">
                               STAGE 0{idx + 1}
                             </span>
                           </div>
-                          <h4 className="text-xs font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                          <h4 className="text-[13px] font-semibold text-[#111827] transition-colors group-hover:text-[#e07b0f]">
                             {step.title}
                           </h4>
-                          <p className="text-[11px] text-slate-400 leading-relaxed">
-                            {step.description}
-                          </p>
+                          <p className="text-[11px] leading-[1.6] text-[#5b6575]">{step.description}</p>
                         </div>
                       );
                     })}
@@ -341,51 +312,47 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
         </div>
       </div>
 
-      {/* Lightbox Modal for Full Resolution Production Plates */}
+      {/* Lightbox Modal */}
       {lightboxImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#111827]/60 p-4 backdrop-blur-sm sm:p-6"
           onClick={() => setLightboxImage(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-4xl overflow-hidden rounded-[24px] border border-[#e2e8f0] bg-white shadow-[0_30px_80px_rgba(17,24,39,0.3)]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
-              <div>
+            <div className="flex items-center justify-between gap-3 border-b border-[#e2e8f0] bg-white p-4">
+              <div className="min-w-0">
                 {lightboxImage.tag && (
-                  <span className="text-xs font-mono text-emerald-400 mr-2 uppercase">
+                  <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#e07b0f]">
                     [{lightboxImage.tag}]
                   </span>
                 )}
-                <span className="font-semibold text-white text-sm sm:text-base">
+                <span className="truncate text-[14px] font-semibold text-[#111827] sm:text-base">
                   {lightboxImage.title}
                 </span>
               </div>
               <button
                 id="close-lightbox-btn"
                 onClick={() => setLightboxImage(null)}
-                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+                aria-label="Close"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#e2e8f0] text-[#5b6575] transition-colors hover:border-[#e07b0f] hover:text-[#e07b0f]"
               >
-                <X className="w-5 h-5" />
+                <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Image Preview */}
-            <div className="relative max-h-[70vh] flex items-center justify-center bg-black/60 p-2">
+            <div className="flex max-h-[68vh] items-center justify-center bg-[#f5f5f7] p-2">
               <img
                 src={lightboxImage.src}
                 alt={lightboxImage.title}
-                className="max-h-[68vh] w-auto max-w-full object-contain rounded-lg"
+                className="max-h-[66vh] w-auto max-w-full rounded-lg object-contain"
               />
             </div>
 
-            {/* Footer with WhatsApp order action */}
-            <div className="p-4 bg-slate-900 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-              <p className="text-slate-400 text-center sm:text-left">
-                {lightboxImage.caption}
-              </p>
+            <div className="flex flex-col items-center justify-between gap-3 border-t border-[#e2e8f0] bg-white p-4 text-[12px] sm:flex-row">
+              <p className="text-center text-[#5b6575] sm:text-left">{lightboxImage.caption}</p>
               <a
                 id="lightbox-wa-btn"
                 href={`https://wa.me/256755943973?text=${encodeURIComponent(
@@ -393,9 +360,9 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold transition-all shrink-0 shadow-md"
+                className="flex shrink-0 items-center gap-2 rounded-full bg-[#0c791e] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#0a6418]"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="h-4 w-4" />
                 <span>Order Similar on WhatsApp</span>
               </a>
             </div>
