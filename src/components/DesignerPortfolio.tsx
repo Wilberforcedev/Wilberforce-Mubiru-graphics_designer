@@ -80,6 +80,13 @@ const branded: Work[] = [
   { title: 'Nyai Secondary School shirt', type: 'School apparel', image: 'nyai-secondary-school-shirt.webp', alt: 'White Nyai Secondary School shirt printed with Hard Work Paves', note: 'School name and motto on a white T-shirt' },
   { title: 'Pay Daily campaign shirt', type: 'Campaign apparel', image: 'pay-daily-campaign-shirt.webp', alt: 'Navy Own it today, Pay Daily campaign shirt with white and yellow lettering', note: 'Promotional slogan apparel' },
   { title: 'St. Ponsiano school shirts', type: 'School apparel', image: 'st-ponsiano-school-shirts.webp', alt: 'Yellow St. Ponsiano school shirts printed with a black school crest', note: 'School crest repeated across a batch of shirts' },
+  { title: 'Thrive Egulu Women’s Day polo', type: 'Event apparel', image: 'thrive-egulu-womens-day-polo.webp', alt: 'White and green Thrive Egulu polo for International Women’s Day, with CARE branding', note: 'Partner and event graphics on a colour-block polo shirt' },
+  { title: 'Nyai S.S. Koboko crest detail', type: 'School apparel', image: 'nyai-koboko-crest-detail.webp', alt: 'Close-up of the Nyai S.S. Koboko crest and Hard Work Paves motto printed on fabric', note: 'Detailed school crest and motto print' },
+  { title: 'Mark 5:36 message shirt', type: 'Faith apparel', image: 'mark-5-36-purple-shirt.webp', alt: 'Purple shirt printed with the message Mark 5:36', note: 'Scripture reference printed on a purple garment' },
+  { title: 'Nalongo Bridals shopping bags', type: 'Branded merchandise', image: 'nalongo-bridals-branded-bags.webp', alt: 'Bright green shopping bags printed with Nalongo Bridals branding and contact details', note: 'Retail packaging for a bridal wear business' },
+  { title: 'Kushna Designs shirt', type: 'Business apparel', image: 'kushna-designs-shirt.webp', alt: 'Maroon Kushna Designs shirt with yellow bridal fashion branding', note: 'Bridal design business identity on a staff shirt' },
+  { title: 'Kushna Designs print detail', type: 'Business apparel', image: 'kushna-designs-print-detail.webp', alt: 'Close-up of yellow Kushna Designs branding printed on a dark shirt', note: 'Close view of the garment print and lettering' },
+  { title: 'Together We Achieve apparel', type: 'Campaign apparel', image: 'together-we-achieve-apparel.webp', alt: 'A batch of red garments printed with Together We Achieve Excellence', note: 'Repeated message graphics across event apparel' },
 ];
 const graphicSrc = (file: string) => '/images/portfolio/' + file;
 const brandedSrc = (file: string) => '/images/branded-items/' + file;
