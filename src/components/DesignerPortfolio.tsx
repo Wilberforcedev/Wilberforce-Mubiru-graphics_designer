@@ -26,7 +26,7 @@ export default function DesignerPortfolio() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#fbfaf8] text-[#17211d] selection:bg-[#d7efb0] selection:text-[#17211d]">
+    <div className="min-h-screen font-sans overflow-x-hidden bg-[#fbfaf8] text-[#17211d] selection:bg-[#d7efb0] selection:text-[#17211d]">
       <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6">
         <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-black/[0.06] bg-white/90 px-4 py-2.5 shadow-[0_12px_40px_rgba(23,33,29,0.06)] backdrop-blur-xl sm:px-6">
           <a href="#home" className="flex items-center gap-3" onClick={closeMenu}>
