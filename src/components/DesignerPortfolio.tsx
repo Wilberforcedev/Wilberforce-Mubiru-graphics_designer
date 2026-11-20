@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowDownToLine, ArrowLeft, ArrowUpRight, Github, Instagram, Linkedin, Mail, MapPin, MessageCircle, X } from 'lucide-react';
 
 type Work = { title: string; type: string; image: string; alt: string; note: string };
@@ -101,6 +101,14 @@ function WorkGrid({ work, onSelect }: { work: Work[]; onSelect: (work: Work) => 
 export default function DesignerPortfolio() {
   const [selected, setSelected] = useState<Work | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    if (!selected) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelected(null);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [selected]);
   const closeMenu = () => setMenuOpen(false);
   const title = isBrandPage ? 'Branded items' : 'Graphics & logo design';
   const currentWork = isBrandPage ? branded : graphics;
